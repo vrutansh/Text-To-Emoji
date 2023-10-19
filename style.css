@@ -11,3 +11,70 @@ html,body{
     width: 100%;
     background-color: black;
 }
+
+#main{
+    height: 100%;
+    width: 100%;
+    background-color: #111;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#main>h1{
+    font-size: 48px;
+    display: flex;
+    align-items: center;
+
+}
+
+#main>h1 span{
+    margin: 0 15px;
+    display: flex;
+    align-items: center;
+}
+
+#main>h1 span img{
+    rotate: 90deg;
+    height: 40px;
+    transition: 0.3s ease;
+
+}
+
+#main>#endec {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #222;
+    margin: 22px;
+    padding: 6px;
+    width: 25%;
+    border: 9px;
+}
+
+#main>#endec h3{
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    padding: 12px 10px;
+    transform: 0.2s ease;
+}
+
+#enc-btn{
+    background-color: #333;
+}
+
+#endec h3 span{
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+
+}
+
+#endec h3 span i {
+    height: 33px;
+}
