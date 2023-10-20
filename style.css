@@ -35,8 +35,7 @@ html,body{
     align-items: center;
 }
 
-#main>h1 span img{
-    rotate: 90deg;
+#main>h1 span i{
     height: 40px;
     transition: 0.3s ease;
 
