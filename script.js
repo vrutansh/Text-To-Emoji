@@ -1,4 +1,32 @@
-function btnclicking(){
+var clutter = ""
+
+function encryption(){ //function for gettinf input and password
+    document.querySelector("#encrypt-btn").addEventListener("click", function(){
+       var input = document.getElementById("txtmsg").value
+       console.log(input)
+
+       var pass = document.getElementById("pwd").value
+       console.log(pass)
+
+        const str = input.split("")
+        console.log(str)
+
+        str.forEach(element => {
+            clutter += `&#128${element.charCodeAt()}`
+        });
+        console.log(clutter)
+
+        document.querySelector("#result").style.display = "block"
+        document.querySelector("#result").innerHTML = clutter
+    })
+
+}
+encryption()
+
+
+
+
+function btnclicking(){ // function for the animation over encrypt and decrypt button
     document.querySelector("#dec-btn").addEventListener("click", function(){
         document.querySelector("#decryption").style.display = "block"
         document.querySelector("#encryption").style.display = "none"
@@ -17,3 +45,4 @@ function btnclicking(){
 }
 
 btnclicking();
+
