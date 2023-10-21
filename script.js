@@ -3,21 +3,33 @@ var clutter = ""
 function encryption(){ //function for gettinf input and password
     document.querySelector("#encrypt-btn").addEventListener("click", function(){
        var input = document.getElementById("txtmsg").value
-       console.log(input)
+       //console.log(input)
 
        var pass = document.getElementById("pwd").value
-       console.log(pass)
+       ///console.log(pass)
 
         const str = input.split("")
-        console.log(str)
+        //console.log(str)
 
         str.forEach(element => {
             clutter += `&#128${element.charCodeAt()}`
         });
-        console.log(clutter)
+        //console.log(clutter)
 
-        document.querySelector("#result").style.display = "block"
+       
         document.querySelector("#result").innerHTML = clutter
+
+        var datarr = [];
+
+        if(JSON.parse(localStorage.getItem('data1'))){
+            datarr.JSON.parse(localStorage.getItem('data1'))
+            datarr.push({"pass":pass, "input":input, "clutter":clutter})
+        }else{
+            datarr = [{"pass":pass, "input":input, "clutter":clutter}]
+        }
+         
+        // console.log(data)
+        localStorage.setItem('data1', JSON.stringify(datarr))
     })
 
 }
@@ -32,6 +44,7 @@ function btnclicking(){ // function for the animation over encrypt and decrypt b
         document.querySelector("#encryption").style.display = "none"
         document.querySelector("#dec-btn").style.backgroundColor = "#333"
         document.querySelector("#enc-btn").style.backgroundColor = "#222"
+        document.querySelector("#result").style.display = "none"
         document.querySelector("#main>h1 span i").style.rotate = "180deg"
     })
 
@@ -41,7 +54,17 @@ function btnclicking(){ // function for the animation over encrypt and decrypt b
         document.querySelector("#enc-btn").style.backgroundColor = "#333"
         document.querySelector("#dec-btn").style.backgroundColor = "#222"
         document.querySelector("#main>h1 span i").style.rotate = "360deg"
+        document.querySelector("#result").style.display = "none"
     })
+
+    document.querySelector("#encrypt-btn").addEventListener("click", function(){
+        document.querySelector("#result").style.display = "block"
+    })
+
+    document.querySelector("#decrypt-btn").addEventListener("click", function(){
+        document.querySelector("#result").style.display = "block"
+    })
+
 }
 
 btnclicking();
