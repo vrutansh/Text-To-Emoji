@@ -12,7 +12,7 @@ function encryption(){ //function for gettinf input and password
         //console.log(str)
 
         str.forEach(element => {
-            clutter += `&#128${element.charCodeAt()}`
+            clutter += `&#128${element.charCodeAt()} `
         });
         //console.log(clutter)
 
@@ -20,7 +20,7 @@ function encryption(){ //function for gettinf input and password
         document.querySelector("#result").innerHTML = clutter
 
         var datarr = [];
-
+        //checking the data and pushing it to local stroage
         if(JSON.parse(localStorage.getItem('data1'))){
             datarr.JSON.parse(localStorage.getItem('data1'))
             datarr.push({"pass":pass, "input":input, "clutter":clutter})
@@ -35,6 +35,49 @@ function encryption(){ //function for gettinf input and password
 }
 encryption()
 
+
+function decryption(){
+    document.querySelector("#decrypt-btn").addEventListener("click", function(){
+        var clutter2 = ""
+        //getting input emoji message
+        var input2 = document.querySelector("#emojimsg").value
+
+        var pass = document.querySelector("#finalpwd").value
+        // taking stored data from local storage
+        var user = JSON.parse(localStorage.getItem('data1'))
+        console.log(user)
+
+        var str2 = input2.split(" ")
+
+        str2.forEach(element =>{
+            clutter2 += `&#${(element.charCodeAt(0))}`
+        })
+        console.log(clutter2)
+
+        var found;
+        for(let i of user){
+            if(i.clutter == clutter2){
+                found = i;
+                console.log(i)
+            }
+        }
+
+        if(found.clutter === clutter2){
+            document.querySelector("#result").style.display = "block"
+            document.querySelector("#result").style.color = "#eee"
+
+            document.querySelector("#result").innerHTML = found.input
+        }
+        else{
+            document.querySelector("#result").style.display = "block"
+            document.querySelector("#result").style.color = "yellow"
+            document.querySelector("#result").innerHTML = "Wrong Password"
+        }
+
+    })
+}
+
+decryption()
 
 
 
