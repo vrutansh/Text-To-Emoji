@@ -37,24 +37,19 @@ function encryption(){ //function for gettinf input and password
 }
 
 
-function decryption(){
-    document.querySelector("#decrypt-btn").addEventListener("click", function() {
+function decryption() {
+    document.querySelector("#decrypt-btn").addEventListener("click", function () {
         var clutter2 = '';
-        //getting input emoji message
         var input2 = document.querySelector("#emojimsg").value
-
-        var finalpass = document.querySelector("#finalpwd").value
-        // taking stored data from local storage
+        var finalPass = document.querySelector("#finalpwd").value
         var user = JSON.parse(localStorage.getItem('data1'))
         console.log(user)
-
         var str2 = input2.split(" ")
-
         str2.forEach(element => {
-            clutter2 += `&#${(element.charPointAt(0))} `
+                clutter2 += `&#${(element.codePointAt(0))} `
+                // console.log((element.charCodeAt()) * Math.floor(Math.random() * 10))
         });
         console.log(clutter2)
-
         var found;
         for(let i of user){
             if(i.clutter == clutter2){
@@ -62,22 +57,20 @@ function decryption(){
                 console.log(i)
             }
         }
-
-        if (found.clutter === clutter2){
-            document.querySelector("#result").style.display = "block"
-            document.querySelector("#result").style.color = "#eee"
+        if (found.clutter === clutter2) {
+            console.log("jay ho")
+            document.querySelector("#result").style.display = `block`
+            document.querySelector("#result").style.color = `#eee`
 
             document.querySelector("#result").innerHTML = found.input
         } else {
-            document.querySelector("#result").style.display = "block"
-            document.querySelector("#result").style.color = "yellow"
-            document.querySelector("#result").innerHTML = "Wrong Password"
+            document.querySelector("#result").style.display = `block`
+            document.querySelector("#result").style.color = `red`
+            document.querySelector("#result").innerHTML = "Wrong password!"
         }
-
     })
+
 }
-
-
 
 
 
