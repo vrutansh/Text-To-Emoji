@@ -1,18 +1,20 @@
+const text = document.querySelector("#txtmsg")
+const passw = document.querySelector("#pwd")
+const result = document.querySelector("#result")
 var clutter = ""
 
 function encryption(){ //function for gettinf input and password
-    document.querySelector("#encrypt-btn").addEventListener("click", function(){
+    document.querySelector("#encrypt-btn").addEventListener("click", function() {
        var input = document.getElementById("txtmsg").value
        //console.log(input)
 
        var pass = document.getElementById("pwd").value
        ///console.log(pass)
 
-        const str = input.split("")
-        //console.log(str)
-
+        //converting it into emojis
+        var str = input.split("")
         str.forEach(element => {
-            clutter += `&#128${element.charCodeAt()} `
+            clutter += `&#128${(element.charCodeAt())} `
         });
         //console.log(clutter)
 
@@ -22,7 +24,7 @@ function encryption(){ //function for gettinf input and password
         var datarr = [];
         //checking the data and pushing it to local stroage
         if(JSON.parse(localStorage.getItem('data1'))){
-            datarr.JSON.parse(localStorage.getItem('data1'))
+            datarr = JSON.parse(localStorage.getItem('data1'))
             datarr.push({"pass":pass, "input":input, "clutter":clutter})
         }else{
             datarr = [{"pass":pass, "input":input, "clutter":clutter}]
@@ -33,25 +35,24 @@ function encryption(){ //function for gettinf input and password
     })
 
 }
-encryption()
 
 
 function decryption(){
-    document.querySelector("#decrypt-btn").addEventListener("click", function(){
-        var clutter2 = ""
+    document.querySelector("#decrypt-btn").addEventListener("click", function() {
+        var clutter2 = '';
         //getting input emoji message
         var input2 = document.querySelector("#emojimsg").value
 
-        var pass = document.querySelector("#finalpwd").value
+        var finalpass = document.querySelector("#finalpwd").value
         // taking stored data from local storage
         var user = JSON.parse(localStorage.getItem('data1'))
         console.log(user)
 
         var str2 = input2.split(" ")
 
-        str2.forEach(element =>{
-            clutter2 += `&#${(element.charCodeAt(0))}`
-        })
+        str2.forEach(element => {
+            clutter2 += `&#${(element.charPointAt(0))} `
+        });
         console.log(clutter2)
 
         var found;
@@ -62,13 +63,12 @@ function decryption(){
             }
         }
 
-        if(found.clutter === clutter2){
+        if (found.clutter === clutter2){
             document.querySelector("#result").style.display = "block"
             document.querySelector("#result").style.color = "#eee"
 
             document.querySelector("#result").innerHTML = found.input
-        }
-        else{
+        } else {
             document.querySelector("#result").style.display = "block"
             document.querySelector("#result").style.color = "yellow"
             document.querySelector("#result").innerHTML = "Wrong Password"
@@ -77,27 +77,35 @@ function decryption(){
     })
 }
 
-decryption()
+
 
 
 
 function btnclicking(){ // function for the animation over encrypt and decrypt button
+
+    document.querySelector("button").addEventListener("click", function () {
+        document.querySelector("#result").style.display = "block"
+        // console.log(localStorage.getItem("password"))
+        // console.log(localStorage.getItem("emojis"))
+    })
+
     document.querySelector("#dec-btn").addEventListener("click", function(){
+        document.querySelector("#result").style.display = "none"
         document.querySelector("#decryption").style.display = "block"
         document.querySelector("#encryption").style.display = "none"
         document.querySelector("#dec-btn").style.backgroundColor = "#333"
         document.querySelector("#enc-btn").style.backgroundColor = "#222"
-        document.querySelector("#result").style.display = "none"
         document.querySelector("#main>h1 span i").style.rotate = "180deg"
     })
 
     document.querySelector("#enc-btn").addEventListener("click", function(){
-        document.querySelector("#encryption").style.display = "block"
         document.querySelector("#decryption").style.display = "none"
-        document.querySelector("#enc-btn").style.backgroundColor = "#333"
-        document.querySelector("#dec-btn").style.backgroundColor = "#222"
-        document.querySelector("#main>h1 span i").style.rotate = "360deg"
         document.querySelector("#result").style.display = "none"
+        document.querySelector("#encryption").style.display = "block"
+        document.querySelector("#dec-btn").style.backgroundColor = "#222"
+        document.querySelector("#enc-btn").style.backgroundColor = "#333"
+        document.querySelector("#main>h1 span i").style.rotate = "360deg"
+        
     })
 
     document.querySelector("#encrypt-btn").addEventListener("click", function(){
@@ -110,5 +118,9 @@ function btnclicking(){ // function for the animation over encrypt and decrypt b
 
 }
 
-btnclicking();
 
+encryption()
+
+decryption()
+
+btnclicking();
