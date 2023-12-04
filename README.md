@@ -1,5 +1,5 @@
 # Text-To-Emoji
- This project texts your text and converts it into emjoi for encryption , for decryption you take the emoji and it will give the text
+-> This project texts your text and converts it into emjoi for encryption , for decryption you take the emoji and it will give the text
 
 # Link:
 
